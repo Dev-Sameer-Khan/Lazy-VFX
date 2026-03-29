@@ -190,6 +190,8 @@ const VFXParticals = ({ name, settings = {}, alphaMap, geometry }) => {
         vertexShader={vertex}
         fragmentShader={fragment}
         blending={THREE.AdditiveBlending}
+        depthTest={false}
+        depthWrite={false}
         transparent
         defines={{
           BILLBOARD_MODE: renderMode === "billboard",
