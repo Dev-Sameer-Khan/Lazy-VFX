@@ -14,7 +14,7 @@
     "motion-design"
   ],
   "type": "module",
-"main": "./dist/lazy-vfx.umd.js",
+  "main": "./dist/lazy-vfx.umd.js",
   "module": "./dist/lazy-vfx.es.js",
   "exports": {
     ".": {
@@ -32,11 +32,11 @@
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
+    "@react-three/drei": ">=9.0.0",
+    "@react-three/fiber": ">=8.0.0",
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0",
-    "three": ">=0.150.0",
-    "@react-three/fiber": ">=8.0.0",
-    "@react-three/drei": ">=9.0.0"
+    "three": ">=0.150.0"
   },
   "dependencies": {
     "@react-three/postprocessing": "^3.0.4",
@@ -50,12 +50,18 @@
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
     "globals": "^15.15.0",
+    "path": "^0.12.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "three": "^0.183.2",
+    "three": "^0.160.0",
     "vite": "^6.2.0",
-    "vite-plugin-glsl": "^1.5.6",
-    "path": "^0.12.7"
+    "vite-plugin-glsl": "^1.5.6"
+  },
+  "overrides": {
+    "postprocessing": "6.36.7"
+  },
+  "resolutions": {
+    "postprocessing": "6.36.7"
   },
   "author": "Sameer Khan",
   "license": "MIT"

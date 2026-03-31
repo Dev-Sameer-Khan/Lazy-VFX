@@ -1,5 +1,10 @@
-import { Environment, OrbitControls, Stats, useTexture } from "@react-three/drei";
-import VFXParticals from "./vfxs/VFXParticals";
+import {
+  Environment,
+  OrbitControls,
+  Stats,
+  useTexture,
+} from "@react-three/drei";
+import VFXParticles from "./vfxs/VFXParticles";
 import VFXEmitter from "./vfxs/VFXEmitter";
 import { useRef } from "react";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
@@ -8,18 +13,27 @@ export const Experience = () => {
   const emitterRed = useRef();
   const emitterBlue = useRef();
 
-  const text = useTexture("https://static.thenounproject.com/png/4312916-200.png")
+  const text = useTexture(
+    "https://static.thenounproject.com/png/4312916-200.png",
+  );
 
   return (
     <>
       <Stats />
       <OrbitControls enablePan={false} />
       <Environment preset="sunset" />
-      <VFXParticals
+      <VFXParticles
         name="sparks"
-        settings={{ nParticals: 10000, intensity: 2, renderMode: "billboard", fadeAlpha:[0.5,0.5], fadeSize:[0,0], gravity: [0,-10,0]}}
+        settings={{
+          nParticals: 10000,
+          intensity: 1,
+          renderMode: "billboard",
+          fadeAlpha: [0.5, 0.5],
+          fadeSize: [0, 0],
+          gravity: [0, -10, 0],
+        }}
         alphaMap={text}
-        geometry={<sphereGeometry/>}
+        // geometry={<sphereGeometry />}  
       />
       <VFXEmitter
         ref={emitterRed}
@@ -53,7 +67,7 @@ export const Experience = () => {
         }}
       />
       <EffectComposer>
-        <Bloom intensity={1.2} luminanceThreshold={1} mipmapBlur />
+        <Bloom intensity={1} luminanceThreshold={1} mipmapBlur />
       </EffectComposer>
     </>
   );

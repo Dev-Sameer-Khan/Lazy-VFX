@@ -1,23 +1,27 @@
-import React, {useCallback, useMemo, useState} from "react";
-import { forwardRef } from "react";
-import { useVFX } from "./VFXStore";
-import { useRef } from "react";
-import { useImperativeHandle } from "react";
 import { useFrame } from "@react-three/fiber";
-import { randFloat, randInt } from "three/src/math/MathUtils";
-import * as THREE from "three";
+import {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { Euler, Quaternion, Vector3 } from "three";
+import { randFloat, randInt } from "three/src/math/MathUtils.js";
 import { VFXBuilderEmitter } from "./VFXBuilder";
+import { useVFX } from "./VFXStore";
 
-const worldPosition = new THREE.Vector3();
-const worldQuaternion = new THREE.Quaternion();
-const worldEuler = new THREE.Euler();
-const worldRotation = new THREE.Euler();
-const worldScale = new THREE.Vector3();
+const worldPosition = new Vector3();
+const worldQuaternion = new Quaternion();
+const worldEuler = new Euler();
+const worldRotation = new Euler();
+const worldScale = new Vector3();
 
-/**
+/**a
  * @typedef {Object} VFXEmitterSettings
  * @property {number} [duration=1]
- * @property {number} [nParticles=1000]
+ * @property {number} [nbParticles=1000]
  * @property {"time"|"burst"} [spawnMode="time"]
  * @property {boolean} [loop=false]
  * @property {number} [delay=0]
@@ -47,53 +51,55 @@ const worldScale = new THREE.Vector3();
 /**
  * @type React.FC<VFXEmitterProps>
  */
-
 const VFXEmitter = forwardRef(
-  ({ debug = false, emitter, settings = {}, ...props }, forwardRef) => {
-    const [{
-      duration = 1,
-      nParticles = 1000,
-      spawnMode = "time", // time, burst
-      loop = false,
-      delay = 0,
-      colorStart = ["white", "skyblue"],
-      colorEnd = [],
-      particlesLifetime = [0.1, 1],
-      speed = [5, 20],
-      size = [0.1, 1],
-      startPositionMin = [-1, -1, -1],
-      startPositionMax = [1, 1, 1],
-      startRotationMin = [0, 0, 0],
-      startRotationMax = [0, 0, 0],
-      rotationSpeedMin = [0, 0, 0],
-      rotationSpeedMax = [0, 0, 0],
-      directionMin = [0, 0, 0],
-      directionMax = [0, 0, 0],
-    },setSettings] = useState(settings);
+  ({ debug, emitter, settings = {}, ...props }, forwardedRef) => {
+    const [
+      {
+        duration = 1,
+        nbParticles = 1000,
+        spawnMode = "time", // time, burst
+        loop = false,
+        delay = 0,
+        colorStart = ["white", "skyblue"],
+        colorEnd = [],
+        particlesLifetime = [0.1, 1],
+        speed = [5, 20],
+        size = [0.1, 1],
+        startPositionMin = [-1, -1, -1],
+        startPositionMax = [1, 1, 1],
+        startRotationMin = [0, 0, 0],
+        startRotationMax = [0, 0, 0],
+        rotationSpeedMin = [0, 0, 0],
+        rotationSpeedMax = [0, 0, 0],
+        directionMin = [0, 0, 0],
+        directionMax = [0, 0, 0],
+      },
+      setSettings,
+    ] = useState(settings);
 
     const emit = useVFX((state) => state.emit);
 
     const ref = useRef();
-    useImperativeHandle(forwardRef, () => ref.current);
+    useImperativeHandle(forwardedRef, () => ref.current);
 
-    const elapsedTime = useRef(0);
     const emitted = useRef(0);
+    const elapsedTime = useRef(0);
 
     useFrame(({ clock }, delta) => {
-      const time = clock.elapsedTime;
+      const time = clock.getElapsedTime();
 
-      if (emitted.current < nParticles || loop) {
+      if (emitted.current < nbParticles || loop) {
         if (!ref) {
           return;
         }
         const particlesToEmit =
           spawnMode === "burst"
-            ? nParticles
+            ? nbParticles
             : Math.max(
                 0,
                 Math.floor(
-                  ((elapsedTime.current - delay) / duration) * nParticles,
-                ),
+                  ((elapsedTime.current - delay) / duration) * nbParticles
+                )
               );
 
         const rate = particlesToEmit - emitted.current;
@@ -166,16 +172,16 @@ const VFXEmitter = forwardRef(
             onRestart={onRestart}
           />
         ) : null,
-      [debug],
+      [debug]
     );
 
     return (
       <>
-      {settingsBuilder}
+        {settingsBuilder}
         <object3D {...props} ref={ref} />
       </>
     );
-  },
+  }
 );
 
 export default VFXEmitter;
