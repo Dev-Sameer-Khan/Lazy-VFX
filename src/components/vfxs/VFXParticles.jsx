@@ -45,7 +45,7 @@ const tmpColor = new Color();
 const VFXParticles = ({ name, settings = {}, alphaMap, geometry }) => {
   const {
     nbParticles = 1000,
-    intensity = 1,
+    intensity = 2,
     renderMode = "mesh",
     fadeSize = [0.1, 0.9],
     fadeAlpha = [0, 1.0],

@@ -28,11 +28,11 @@ export const Experience = () => {
         name="sparks" // A unique identifier for this particle system
         settings={{
           nParticals: 10000, // Maximum number of particles to allocate
-          intensity: 1, // Brightness multiplier
+          intensity: 2, // Brightness multiplier
           renderMode: "billboard", // "billboard" or "mesh" or "stretchBillboard"
           fadeAlpha: [0.5, 0.5], // Opacity fade in/out settings
           fadeSize: [0, 0], // Size fade in/out settings
-          gravity: [0, -10, 0], // Apply gravity (x, y, z)
+          gravity: [0, -20, 0], // Apply gravity (x, y, z)
         }}
         alphaMap={text}
         // geometry={<sphereGeometry />}
@@ -41,12 +41,12 @@ export const Experience = () => {
       {/* Step 2: Define your emitter */}
       <VFXEmitter
         debug // Show debug visualization
-        emitter="particles" // Target the particle system by name
+        emitter="sparks" // Target the particle system by name
         settings={{
           duration: 4,  // Emission cycle duration in seconds
           delay: 0, // Time delay before starting emission
           nbParticles: 10000, // Number of particles to emit per cycle
-          spawnMode: "burst", // Emission mode: 'time' or 'burst'
+          spawnMode: "time", // Emission mode: 'time' or 'burst'
           loop: true, // Continuously emit particles (only if `spawnMode` is 'time')
 
            // Position range (min/max)
@@ -61,20 +61,20 @@ export const Experience = () => {
           rotationSpeedMax: [0, 0, 0],
 
            // Particle lifetime range [min, max]
-          particlesLifetime: [0.1, 1],
+          particlesLifetime: [0.1, 5],
 
           // Particle speed range [min, max]
-          speed: [1, 5],
+          speed: [1, 10],
 
           // Direction range (min/max)
           directionMin: [-0.5, 0, -0.5],
           directionMax: [0.5, 1, 0.5],
  
           // Color at start - an array of strings for random selection
-          colorStart: ["#ff0000", "#ffffff"],
+          colorStart: ["#ffe500", "#ffe500"],
 
            // Color at end - an array of strings for random selection
-          colorEnd: ["#ffffff", "#ffffff"],
+          colorEnd: ["#ffe500", "#ffffff"],
 
           // Particle size range [min, max]
           size: [0.1, 0.5],
