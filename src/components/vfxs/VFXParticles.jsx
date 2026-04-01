@@ -207,7 +207,6 @@ const VFXParticles = ({ name, settings = {}, alphaMap, geometry }) => {
         vertexShader={vertex}
         fragmentShader={fragment}
         blending={AdditiveBlending}
-        depthTest={false}
         depthWrite={false}
         transparent
         defines={{

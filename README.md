@@ -4,7 +4,7 @@
 
 Lazy VFX is a minimal, shader-driven VFX engine designed for modern web apps using React and Three.js. It abstracts away all the math and plumbing for emitters, GPU-accelerated particles, and real-time shaders, so you can stay focused on building cinematic, interactive experiences.
 
-[Live demo](https://lazy-vfx.vercel.app/demo) - [Fireworks demo](#) - [Wizard Game demo](#)
+[Live demo](https://lazy-vfx.vercel.app/demo) - [Fireworks demo](https://fireworks-five-sigma.vercel.app/) - [Wizard Game demo](https://wizard-game-sable.vercel.app/)
 
 ---
 
