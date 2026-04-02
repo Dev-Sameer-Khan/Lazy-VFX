@@ -71,7 +71,7 @@ function Experience() {
       <VFXParticles
         name="sparks" // A unique identifier for this particle system
         settings={{
-          nParticals: 10000, // Maximum number of particles to allocate
+          nbParticles: 10000, // Maximum number of particles to allocate
           intensity: 2, // Brightness multiplier
           renderMode: "billboard", // "billboard" or "mesh" or "stretchBillboard"
           fadeAlpha: [0.5, 0.5], // Opacity fade in/out settings
